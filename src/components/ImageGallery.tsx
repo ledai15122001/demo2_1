@@ -13,12 +13,34 @@ const GALLERY_IMAGES = [
 
 const ImageGallery = () => {
   return (
-    <section className="overflow-hidden bg-[#131313]" aria-label="Salon gallery">
-      <div className="gallery-marquee-track flex w-max will-change-transform gap-3">
+    <section className="overflow-hidden bg-[#FAF8F5] pb-20 pt-24 sm:pb-24 sm:pt-32" aria-labelledby="lookbook-heading">
+      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-16">
+        <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.38em] text-[#8b8178] sm:mb-10">
+          Lookbook
+        </p>
+
+        <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(280px,0.9fr)] lg:gap-16">
+          <h2
+            id="lookbook-heading"
+            className="max-w-[760px] text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[#171513]"
+          >
+            <span className="block">Diện mạo mới, tự tin hơn mỗi ngày</span>
+            <span className="mt-2 block font-display font-normal italic tracking-[-0.045em] text-[#4a433d]">
+              Cùng Triệu Salon tại Lái Thiêu
+            </span>
+          </h2>
+
+          <p className="max-w-[440px] pb-1 text-sm leading-7 text-[#6d655e] lg:text-[15px]">
+            Khám phá những diện mạo mới tại Triệu Salon Lái Thiêu — nơi mỗi kiểu tóc được chăm chút theo cá tính, phong cách và đường nét riêng của bạn. Từ cắt, nhuộm đến tạo kiểu, chúng tôi giúp bạn tìm thấy mái tóc phù hợp và tự tin hơn mỗi ngày.
+          </p>
+        </div>
+      </div>
+
+      <div className="gallery-marquee-track mt-20 flex w-max will-change-transform gap-3 sm:mt-28">
         {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
           <div
             key={i}
-            className="h-[80vh] shrink-0"
+            className="h-[52vh] shrink-0"
             style={{ width: 'clamp(200px, 33vw, 480px)' }}
           >
             <img
