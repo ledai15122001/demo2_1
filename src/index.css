@@ -105,93 +105,19 @@ body {
 }
 
 /* ── Hero responsive geometry ──
-   The Hero content is a single flex column (#hero-stack) anchored to the
-   bottom-left. Its inner block width, title font-size, and bottom padding
-   scale by viewport via clamp() and media queries so the heading never
-   wraps to three lines and the badge never overlaps the description.
+   The Hero content is a centered editorial composition: headline,
+   subtitle, and CTA buttons stacked vertically in the viewport center.
+   The headline uses mix-blend-mode: difference to blend with the
+   background video; the rest of the content stays normal. */
 
-   Three regimes:
-     MOBILE  < 768px
-     TABLET  768–1023px
-     DESKTOP 1024px+   (matches the original composition) */
-
-:root {
-  /* DESKTOP (default) — preserves the original 42%-width composition */
-  --hero-inner-width: 42%;
-  --hero-inner-min-width: 320px;
-  --hero-title-font-size: clamp(48px, 9vw, 128px);
-  --hero-description-font-size: 15px;
-  --hero-description-max-width: 520px;
-  --hero-stack-padding-bottom: 80px;
-  --hero-stack-padding-left: 112px;
-}
-
-/* TABLET 768–1023px */
-@media (max-width: 1023px) {
-  :root {
-    --hero-inner-width: 62%;
-    --hero-inner-min-width: 360px;
-    --hero-title-font-size: clamp(44px, 7.2vw, 88px);
-    --hero-description-font-size: 15px;
-    --hero-description-max-width: 460px;
-    /* Reserve a bottom safe area so the CTA row clears the centered
-       scroll-down indicator (visible at md+). Scales with viewport
-       height so short tablets get enough clearance without pushing
-       content too high on tall ones. */
-    --hero-stack-padding-bottom: clamp(120px, 16vh, 160px);
-    --hero-stack-padding-left: 48px;
-  }
-}
-
-/* MOBILE < 768px */
-@media (max-width: 767px) {
-  :root {
-    --hero-inner-width: 88%;
-    --hero-inner-min-width: 0;
-    --hero-title-font-size: clamp(40px, 11vw, 64px);
-    --hero-description-font-size: 14px;
-    --hero-description-max-width: 100%;
-    --hero-stack-padding-bottom: 56px;
-    --hero-stack-padding-left: 24px;
-  }
-}
-
-/* iPad/tablet portrait at the desktop-width edge (1024–1099px) on a tall
-   screen. At 1024px the desktop rules apply (80px bottom padding), but
-   the #hero-scroll indicator is visible (md+). On a tall viewport the
-   CTA row collides with the indicator. This narrow override reserves a
-   bottom safe area ONLY for this geometry — short desktops (1024×768,
-   1440×900) keep the original 80px and are visually unchanged. */
-@media (min-width: 1024px) and (max-width: 1099px) and (min-height: 1100px) {
-  :root {
-    --hero-stack-padding-bottom: clamp(120px, 16vh, 160px);
-  }
-}
-
-/* The stack fills the Hero; the inner block holds the four flow items. */
 .hero-stack {
-  padding-left: var(--hero-stack-padding-left);
-  padding-bottom: var(--hero-stack-padding-bottom);
-  padding-right: 24px;
+  padding: 0 24px;
 }
 
-.hero-stack-inner {
-  width: var(--hero-inner-width);
-  min-width: var(--hero-inner-min-width);
-  max-width: 100%;
-}
-
-/* "Tóc Đẹp" must never wrap. white-space: nowrap is the guarantee;
-   the responsive font-size + width above ensure it always fits. */
+/* "Triệu Salon" must never wrap. white-space: nowrap is the guarantee;
+   the responsive clamp() font-size ensures it always fits on one line. */
 .hero-title {
-  font-size: var(--hero-title-font-size);
   white-space: nowrap;
-}
-
-.hero-description {
-  font-size: var(--hero-description-font-size);
-  line-height: 1.8;
-  max-width: var(--hero-description-max-width);
 }
 
 @keyframes scrollPulse {

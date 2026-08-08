@@ -18,7 +18,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
         muted
         playsInline
         preload="auto"
-        aria-label="Không gian salon Triệu Tóc Đẹp"
+        aria-label="Không gian salon Triệu Salon"
         className="absolute inset-0 h-full w-full object-cover object-center"
       >
         <source src={HERO_VIDEO} type="video/mp4" />
@@ -26,69 +26,53 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
 
       <div
         id="hero-stack"
-        className={`hero-stack pointer-events-none absolute inset-0 z-[90] flex flex-col justify-end transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
+        className={`hero-stack pointer-events-none absolute inset-0 z-[90] flex flex-col items-center justify-center px-6 text-center transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
         aria-hidden={!visible}
       >
-        <div className="hero-stack-inner flex flex-col">
-          <h1
-            id="hero-title"
-            className="hero-title text-white tracking-tight"
-            style={{
-              fontFamily: "'Newsreader', serif",
-              lineHeight: 1,
-              fontWeight: 300,
-              letterSpacing: '-0.01em',
-            }}
-          >
-            Triệu
-            <br />
-            Tóc Đẹp
-          </h1>
+        <h1
+          className="hero-title select-none whitespace-nowrap text-white"
+          style={{
+            fontFamily: "'Manrope', sans-serif",
+            fontWeight: 600,
+            fontSize: 'clamp(2.75rem, 5.5vw, 5.2rem)',
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+            mixBlendMode: 'difference',
+          }}
+        >
+          Triệu Salon
+        </h1>
 
-          <div
-            id="hero-review-badge"
-            className="hero-review-badge mt-6 inline-flex w-max max-w-none flex-nowrap items-center gap-2 whitespace-nowrap rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[10px] text-white backdrop-blur-sm"
+        <p
+          className="hero-subtitle mt-7 text-white/80"
+          style={{
+            fontFamily: "'Be Vietnam Pro', sans-serif",
+            fontWeight: 500,
+            fontSize: 'clamp(13px, 1.4vw, 16px)',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+          }}
+        >
+          Salon Tóc Tại Lái Thiêu
+        </p>
+
+        <div className="hero-cta-row pointer-events-auto mt-10 flex items-center gap-3 md:gap-4">
+          <a
+            href="https://zalo.me/0942777009"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whitespace-nowrap bg-white px-6 py-4 text-[11px] font-medium uppercase tracking-[0.12em] text-[#1c1612] transition-colors duration-300 hover:bg-white/90 active:scale-95 md:px-8 md:text-[12px] md:tracking-[0.15em]"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
-            aria-label="Google 4.9 trên 5, 1278 đánh giá"
           >
-            <span className="font-medium tracking-[0.08em]">GOOGLE</span>
-            <span className="inline-flex flex-nowrap gap-0.5 text-[12px] text-[#c9a96e]" aria-hidden="true">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <span key={index}>★</span>
-              ))}
-            </span>
-            <span className="font-medium">4.9</span>
-            <span className="text-white/50">·</span>
-            <span>1278 đánh giá</span>
-          </div>
-
-          <div id="hero-content" className="hero-content mt-10 flex flex-col">
-            <p
-              className="hero-content-item hero-description text-white/65"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Salon tóc nữ tại Lái Thiêu, Thuận An, chuyên cắt, uốn, nhuộm, duỗi và phục hồi tóc. Mỗi kiểu tóc được tư vấn dựa trên chất tóc, gương mặt và phong cách riêng để bạn có một mái tóc đẹp, dễ chăm sóc và phù hợp với mình.
-            </p>
-
-            <div className="hero-content-item hero-cta-row pointer-events-auto mt-10 flex items-center gap-2 md:gap-4">
-              <a
-                href="https://zalo.me/0942777009"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whitespace-nowrap bg-white px-5 py-4 text-[11px] font-medium uppercase tracking-[0.12em] text-[#1c1612] transition-colors duration-300 hover:bg-white/90 active:scale-95 md:px-8 md:text-[12px] md:tracking-[0.15em]"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                Đặt Lịch Hẹn
-              </a>
-              <a
-                href="#services-pricing"
-                className="whitespace-nowrap border border-white/60 px-5 py-4 text-[11px] font-medium uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-95 md:px-8 md:text-[12px] md:tracking-[0.15em]"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                Dịch Vụ &amp; Giá
-              </a>
-            </div>
-          </div>
+            Đặt Lịch Hẹn
+          </a>
+          <a
+            href="#services-pricing"
+            className="whitespace-nowrap border border-white/60 px-6 py-4 text-[11px] font-medium uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-95 md:px-8 md:text-[12px] md:tracking-[0.15em]"
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            Dịch Vụ &amp; Giá
+          </a>
         </div>
       </div>
 
