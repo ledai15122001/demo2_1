@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 const HERO_VIDEO = 'https://res.cloudinary.com/ll6thxdy/video/upload/v1786169753/hero_edited_vrnxwh.mp4';
 
@@ -7,6 +7,18 @@ interface HeroProps {
 }
 
 const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
+  const [hasEntered, setHasEntered] = useState(false);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setHasEntered(true);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  const contentVisible = visible && hasEntered;
+
   return (
     <section
       ref={ref}
@@ -32,7 +44,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
 
       <div className="hero-stack pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <h1
-          className={`hero-title select-none whitespace-nowrap text-white transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
+          className={`hero-title select-none whitespace-nowrap text-white transition-opacity duration-700 ease-out ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
           style={{
             fontFamily: "'Manrope', sans-serif",
             fontWeight: 700,
@@ -42,14 +54,14 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
             mixBlendMode: 'difference',
             WebkitTextStroke: '0.5px rgba(255,255,255,0.2)',
           }}
-          aria-hidden={!visible}
+          aria-hidden={!contentVisible}
         >
           Triệu Salon
         </h1>
 
         <div
-          className={`hero-normal-content transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
-          aria-hidden={!visible}
+          className={`hero-normal-content transition-opacity duration-700 ease-out ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden={!contentVisible}
         >
           <p
             className="hero-subtitle mt-5 text-white/80"
