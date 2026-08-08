@@ -24,16 +24,23 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
         <source src={HERO_VIDEO} type="video/mp4" />
       </video>
 
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.12)' }}
+        aria-hidden="true"
+      />
+
       <div className="hero-stack pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <h1
           className={`hero-title select-none whitespace-nowrap text-white transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
           style={{
             fontFamily: "'Manrope', sans-serif",
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: 'clamp(3.5rem, 6vw, 6rem)',
-            letterSpacing: '-0.035em',
-            lineHeight: 1,
+            letterSpacing: '-0.045em',
+            lineHeight: 0.95,
             mixBlendMode: 'difference',
+            WebkitTextStroke: '0.5px rgba(255,255,255,0.2)',
           }}
           aria-hidden={!visible}
         >
@@ -45,7 +52,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
           aria-hidden={!visible}
         >
           <p
-            className="hero-subtitle mt-7 text-white/80"
+            className="hero-subtitle mt-5 text-white/80"
             style={{
               fontFamily: "'Be Vietnam Pro', sans-serif",
               fontWeight: 500,
@@ -57,7 +64,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
             Salon Tóc Tại Lái Thiêu
           </p>
 
-          <div className="hero-cta-row pointer-events-auto mt-10 flex items-center gap-3 md:gap-4">
+          <div className="hero-cta-row pointer-events-auto mt-8 flex items-center gap-3 md:gap-4">
             <a
               href="https://zalo.me/0942777009"
               target="_blank"
