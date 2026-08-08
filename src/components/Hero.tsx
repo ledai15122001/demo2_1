@@ -30,7 +30,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
           style={{
             fontFamily: "'Manrope', sans-serif",
             fontWeight: 600,
-            fontSize: 'clamp(3rem, 5vw, 5rem)',
+            fontSize: 'clamp(3.5rem, 6vw, 6rem)',
             letterSpacing: '-0.035em',
             lineHeight: 1,
             mixBlendMode: 'difference',
