@@ -1,66 +1,35 @@
 import { forwardRef } from 'react';
 
-const HERO_IMG = 'https://res.cloudinary.com/o5ikznlv/image/upload/f_auto,q_auto:eco,w_1920/v1786087918/2026-08-06_07-24-22_Lumina_1_odim6y.jpg';
+const HERO_VIDEO = 'https://res.cloudinary.com/ll6thxdy/video/upload/v1786162888/hero_v1pofd.mp4';
 
-/**
- * The Hero is always mounted — from frame one. It is never faded in,
- * never swapped, never replaced. The IntroOverlay simply reveals it.
- *
- * LAYOUT ARCHITECTURE (responsive-safe):
- *
- * The title+badge block and the description+CTA block used to be two
- * independently absolutely-positioned elements. At certain viewport sizes
- * (tablet, tall mobile) they collided — the badge overlapped the description
- * and the heading wrapped to three lines.
- *
- * They are now a SINGLE absolutely-positioned flex column
- * (#hero-stack, justify-content: flex-end). The four children flow in natural
- * document order — H1, badge, description, CTA — so they can NEVER overlap
- * regardless of viewport dimensions. Each child keeps its original GSAP
- * target id/class so the master timeline in App.tsx is untouched:
- *
- *   #hero-title            ← SplitText chars
- *   #hero-review-badge     ← badge fade/translate
- *   #hero-content          ← wrapper (not animated itself)
- *   .hero-content-item     ← description + CTA stagger
- *
- * The stack sits at z-[90] so the title still renders above the IntroOverlay
- * (z-[80]) during the intro. The stack is position:absolute (not relative),
- * so the Hero section does NOT create a stacking context — identical to the
- * prior behavior. After the intro the stack scrolls away with the Hero.
- *
- * Responsive geometry is driven entirely by CSS (src/index.css): the title
- * font-size, the stack width, and the bottom padding all scale by viewport
- * via clamp() and media queries. No per-device hacks.
- */
-const Hero = forwardRef<HTMLElement>((_props, ref) => {
+interface HeroProps {
+  visible: boolean;
+}
+
+const Hero = forwardRef<HTMLElement, HeroProps>(({ visible }, ref) => {
   return (
     <section
       ref={ref}
-      className="relative h-screen min-h-[700px] w-full overflow-hidden bg-[#1c1612]"
+      className="relative h-screen w-full overflow-hidden bg-[#1c1612]"
     >
-      {/* ── Hero background (frame one, always present) ── */}
-      <div className="absolute inset-0">
-        <img
-          src={HERO_IMG}
-          alt="Mẫu tóc Triệu Tóc Đẹp"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1c1612]/30 via-transparent to-[#1c1612]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1c1612]/60 via-[#1c1612]/10 to-transparent" />
-      </div>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        aria-label="Không gian salon Triệu Tóc Đẹp"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      >
+        <source src={HERO_VIDEO} type="video/mp4" />
+      </video>
 
-      {/* ── Unified content stack (title + badge + description + CTA) ──
-          A single flex column anchored to the bottom-left of the Hero.
-          Children flow in document order so they never overlap. The stack
-          keeps z-[90] so the title stays above the IntroOverlay (z-[80])
-          during the intro mask reveal. All responsive geometry is in CSS. */}
       <div
         id="hero-stack"
-        className="hero-stack pointer-events-none absolute inset-0 z-[90] flex flex-col justify-end"
+        className={`hero-stack pointer-events-none absolute inset-0 z-[90] flex flex-col justify-end transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
+        aria-hidden={!visible}
       >
         <div className="hero-stack-inner flex flex-col">
-          {/* ── Title ── */}
           <h1
             id="hero-title"
             className="hero-title text-white tracking-tight"
@@ -76,10 +45,9 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
             Tóc Đẹp
           </h1>
 
-          {/* ── Google review badge ── */}
           <div
             id="hero-review-badge"
-            className="hero-review-badge mt-6 inline-flex flex-nowrap items-center gap-2 w-max max-w-none whitespace-nowrap rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[10px] text-white backdrop-blur-sm"
+            className="hero-review-badge mt-6 inline-flex w-max max-w-none flex-nowrap items-center gap-2 whitespace-nowrap rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[10px] text-white backdrop-blur-sm"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
             aria-label="Google 4.9 trên 5, 1278 đánh giá"
           >
@@ -94,11 +62,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
             <span>1278 đánh giá</span>
           </div>
 
-          {/* ── Description + CTA ── */}
-          <div
-            id="hero-content"
-            className="hero-content mt-10 flex flex-col"
-          >
+          <div id="hero-content" className="hero-content mt-10 flex flex-col">
             <p
               className="hero-content-item hero-description text-white/65"
               style={{ fontFamily: "'Inter', sans-serif" }}
@@ -111,14 +75,14 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
                 href="https://zalo.me/0942777009"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="whitespace-nowrap text-[#1c1612] bg-white px-5 md:px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.12em] md:tracking-[0.15em] text-[11px] md:text-[12px] font-medium active:scale-95"
+                className="whitespace-nowrap bg-white px-5 py-4 text-[11px] font-medium uppercase tracking-[0.12em] text-[#1c1612] transition-colors duration-300 hover:bg-white/90 active:scale-95 md:px-8 md:text-[12px] md:tracking-[0.15em]"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
                 Đặt Lịch Hẹn
               </a>
               <a
                 href="#services-pricing"
-                className="whitespace-nowrap border border-white/60 px-5 md:px-8 py-4 text-[11px] md:text-[12px] font-medium uppercase tracking-[0.12em] md:tracking-[0.15em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-95"
+                className="whitespace-nowrap border border-white/60 px-5 py-4 text-[11px] font-medium uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-95 md:px-8 md:text-[12px] md:tracking-[0.15em]"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
                 Dịch Vụ &amp; Giá
@@ -128,22 +92,20 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         </div>
       </div>
 
-      {/* ── Scroll indicator ── */}
       <div
         id="hero-scroll"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
       >
         <span
-          className="text-white/40 text-[10px] uppercase tracking-[0.3em]"
+          className="text-[10px] uppercase tracking-[0.3em] text-white/40"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           Cuộn Xuống
         </span>
-        <div className="w-px h-12 bg-white/20 overflow-hidden">
-          <div className="w-full h-1/2 bg-white scroll-line" />
+        <div className="h-12 w-px overflow-hidden bg-white/20">
+          <div className="scroll-line h-1/2 w-full bg-white" />
         </div>
       </div>
-
     </section>
   );
 });
