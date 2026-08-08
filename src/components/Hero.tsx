@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-const HERO_VIDEO = 'https://res.cloudinary.com/ll6thxdy/video/upload/v1786162888/hero_v1pofd.mp4';
+const HERO_VIDEO = 'https://res.cloudinary.com/ll6thxdy/video/upload/v1786169753/hero_edited_vrnxwh.mp4';
 
 interface HeroProps {
   visible: boolean;
