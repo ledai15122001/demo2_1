@@ -63,7 +63,7 @@ const Nav = forwardRef<HTMLElement, NavProps>(({ heroRef, visible }, ref) => {
             <a
               key={link.label}
               href={link.href}
-              className="rounded px-3 py-2 text-[12px] font-medium uppercase tracking-[0.05em] text-[#e2e2e2]/70 transition-all duration-300 hover:bg-white/5 hover:text-[#e2e2e2]"
+              className="rounded px-3 py-2 text-[12px] font-medium uppercase tracking-[0.05em] text-white/90 transition-all duration-300 hover:bg-white/10 hover:text-white"
             >
               {link.label}
             </a>
@@ -98,7 +98,7 @@ const Nav = forwardRef<HTMLElement, NavProps>(({ heroRef, visible }, ref) => {
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-[12px] uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-white"
+              className="text-[12px] uppercase tracking-[0.2em] text-white/90 transition-colors hover:text-white"
               style={{ fontFamily: "'JetBrains Mono', monospace" }}
             >
               {link.label}

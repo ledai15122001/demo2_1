@@ -5,7 +5,6 @@ import Hero from '@/components/Hero';
 import VideoShowcase from '@/components/VideoShowcase';
 import FloatingContact from '@/components/FloatingContact';
 
-const HairGallery = lazy(() => import('@/components/HairGallery'));
 const ServicesPricing = lazy(() => import('@/components/ServicesPricing'));
 const Stylists = lazy(() => import('@/components/Stylists'));
 const BookingCTA = lazy(() => import('@/components/BookingCTA'));
@@ -13,21 +12,10 @@ const Reviews = lazy(() => import('@/components/Reviews'));
 const MapSection = lazy(() => import('@/components/MapSection'));
 const Footer = lazy(() => import('@/components/Footer'));
 
-export const HERO_CONTENT_DELAY_MS = 3000;
-
 function App() {
   const heroRef = useRef<HTMLElement>(null);
   const floatingRef = useRef<HTMLDivElement>(null);
-  const [heroContentVisible, setHeroContentVisible] = useState(false);
-
-  useEffect(() => {
-    const revealTimer = window.setTimeout(
-      () => setHeroContentVisible(true),
-      HERO_CONTENT_DELAY_MS,
-    );
-
-    return () => window.clearTimeout(revealTimer);
-  }, []);
+  const [heroContentVisible] = useState(true);
 
   useEffect(() => {
     if (!heroContentVisible || !floatingRef.current) return;
@@ -78,7 +66,6 @@ function App() {
         <Hero ref={heroRef} visible={heroContentVisible} />
         <VideoShowcase />
         <Suspense fallback={<div className="min-h-[50vh] bg-[#FAF8F5]" />}>
-          <HairGallery />
           <ServicesPricing />
           <Stylists />
           <BookingCTA />
