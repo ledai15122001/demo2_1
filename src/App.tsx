@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
+import ImageGallery from '@/components/ImageGallery';
 import VideoShowcase from '@/components/VideoShowcase';
 import FloatingContact from '@/components/FloatingContact';
 
@@ -64,6 +65,7 @@ function App() {
 
       <main>
         <Hero ref={heroRef} visible={heroContentVisible} />
+        <ImageGallery />
         <VideoShowcase />
         <Suspense fallback={<div className="min-h-[50vh] bg-[#FAF8F5]" />}>
           <ServicesPricing />

@@ -138,6 +138,10 @@ body {
   animation: marqueeScroll 40s linear infinite;
 }
 
+.gallery-marquee-track {
+  animation: marqueeScroll 22s linear infinite;
+}
+
 /* ── Floating contact widget ──
    Subtle premium idle animation: a gentle breathing scale. Slow,
    continuous, GPU-accelerated (transform only). Staggered per-icon via
